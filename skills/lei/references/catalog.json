@@ -2,7 +2,7 @@
   "schema_version": 1,
   "name": "leiskill",
   "display_name": "lei 的视频剪辑 Skills",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "repository": "k9438324-hash/leiskill",
   "skills": [
     {

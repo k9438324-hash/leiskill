@@ -2,7 +2,7 @@
 name: lei-doctor
 description: "检查 leiskill 的 Python、FFmpeg、审稿依赖和剪映草稿运行环境。用户首次安装、换电脑、依赖报错或要求检查能否运行时使用；只读诊断，不自动安装工具或修改剪映工程。"
 metadata:
-  version: 0.8.0
+  version: 0.8.1
   lei-handoff: |
     - 接手：首次安装、换电脑、运行错误或明确的环境检查请求
     - 交出：逐项检查结果、缺失依赖和可复现的下一步

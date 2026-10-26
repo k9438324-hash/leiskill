@@ -2,7 +2,7 @@
 name: lei-update
 description: "更新官方 leiskill 技能与剪辑运行依赖。用户明确要求更新、升级 leiskill 或重装修复时使用；保留用户素材、原工程、项目状态和其他技能，不在普通剪辑任务中自动更新。"
 metadata:
-  version: 0.8.0
+  version: 0.8.1
   lei-handoff: |
     - 接手：明确的更新或重装请求
     - 交出：官方安装入口执行结果、环境检查与版本核对

@@ -2,21 +2,33 @@
 
 **lei 的视频剪辑 Skills**
 
-[![Version](https://img.shields.io/badge/version-0.8.0-2563EB)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.8.1-2563EB)](VERSION)
 
 面向本地短视频素材的中文剪辑技能包。把带时间码的 SRT、素材目录和目标时长交给助手，先检查原话与删留切点，确认后生成独立、可编辑的剪映草稿。默认 60 fps、无字幕；保留原工程，复用项目缓存。
 
 ## 快速开始
 
-**第 1 步：安装**
+**第 1 步：把安装指令发给 AI**
 
-Windows 打开 PowerShell，粘贴这一整行：
+复制下面整段，发给你正在使用的 Codex、Claude、豆包、WorkBuddy 等 AI：
 
-```powershell
-& ([scriptblock]::Create((Invoke-RestMethod 'https://raw.githubusercontent.com/k9438324-hash/leiskill/main/install.ps1')))
+```text
+请帮我安装 leiskill（lei 的视频剪辑 Skills）：
+https://github.com/k9438324-hash/leiskill
+
+先读取仓库 README 和安装说明，检查你当前是否具备联网、执行本机命令和安装 Skills 的能力。
+具备能力时，请按当前操作系统和你所在的 AI 客户端实际执行安装，不要只复述步骤。
+Windows 使用仓库官方 install.ps1，安装四个技能、审稿依赖和剪辑运行环境；检查并配置当前客户端的技能入口。
+保留已有素材、剪映工程、项目状态和其他技能；更新同名技能前先备份。
+安装后核对技能文件，执行环境检查，并说明怎样在当前客户端调用“视频剪辑助手”或“短视频剪辑”。
+只有检查通过才能说安装成功；缺少剪映、权限、网络或工具时，明确报告卡在哪一步。
+如果你没有本机工具，或当前客户端不支持 Skills，请说明具体限制，再给我最少的手动操作或技能导入方法，不要声称已经安装。
+非 Windows 系统可先安装技能文件，但不要把它说成已经具备本仓库的 Windows 剪映运行环境。
 ```
 
-它会安装四个技能与缺失的审稿依赖，补齐 Python 3.12、Git、Node.js，创建或复用独立 Python 环境，安装 FFmpeg 和剪映草稿依赖，最后检查环境。基础工具通过 winget 安装，可能出现 Windows 权限窗口；没有 winget 时给出修复提示。剪映专业版需提前安装并打开一次，Codex 需自行登录。
+支持本机工具和 Skills 的客户端可以执行安装；仅聊天的网页或手机版需要按 AI 给出的步骤操作。Claude 的本机执行版为 Claude Code；豆包等客户端是否能直接安装，以当前版本的工具与导入能力为准。
+
+Windows 官方安装器会准备四个技能、缺失的审稿依赖及独立 Python 环境，检查 FFmpeg 和剪映。它使用公共技能目录，并为已安装的 Claude Code、WorkBuddy 配置对应入口。剪映专业版需提前安装并打开一次，AI 客户端需自行登录。[手动安装与故障排查](docs/安装与排障.md)
 
 已有环境、只要技能文件时：
 
@@ -28,7 +40,7 @@ npx -y skills add k9438324-hash/leiskill -g --all
 
 **第 2 步：把材料交给 `/lei`**
 
-安装后重启 Codex，新建聊天：
+安装后重新加载当前 AI 客户端的技能或重启客户端，新建聊天：
 
 ```text
 /lei 我有带时间码的 SRT 和本地素材，想剪成约 2 分半。先给删留建议，确认后生成可编辑剪映草稿。
@@ -37,6 +49,7 @@ npx -y skills add k9438324-hash/leiskill -g --all
 ```
 
 已有明确任务时可以继续直接用 `/jj`。没有 SRT 或已确认切点时，助手先索取字幕，不提前扫描或转写全部素材。
+不支持斜杠命令但能读取技能的客户端，可直接说“使用 leiskill 的视频剪辑助手处理这些材料”。
 
 **第 3 步：确认切点，继续同一聊天**
 
@@ -60,7 +73,7 @@ npx -y skills add k9438324-hash/leiskill -g --all
 - 区分技能安装、环境通过、草稿结构通过、剪映播放、导出与发布；每一级只报告实际证据。
 - 不分发剪映、字体、转写模型或用户素材；不自动上传或发布视频。
 
-重点验证环境为 Windows + Codex。技能文件可被其他支持 Skills 的助手安装，但视频运行与各助手的完整交互尚未逐一验收。
+重点验证环境为 Windows + Codex。安装器提供公共技能目录、Claude Code 与 WorkBuddy 的入口适配；其他客户端由 AI 根据真实支持情况安装或导入。各客户端的完整交互与视频运行尚未逐一验收。
 
 ## 文档与维护
 

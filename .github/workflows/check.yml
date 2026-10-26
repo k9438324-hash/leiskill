@@ -14,6 +14,9 @@ jobs:
           python-version: '3.12'
       - run: python tools/validate.py
       - run: python -m unittest discover -s tests -v
+      - name: Check client detection and skill linking
+        shell: pwsh
+        run: ./tests/test-installer.ps1
       - name: Check PowerShell syntax and read-only diagnostics
         shell: pwsh
         run: |
@@ -23,4 +26,6 @@ jobs:
           ./install.ps1 -CheckOnly
       - name: Check Windows PowerShell 5.1
         shell: powershell
-        run: ./install.ps1 -CheckOnly
+        run: |
+          ./install.ps1 -CheckOnly
+          ./tests/test-installer.ps1
