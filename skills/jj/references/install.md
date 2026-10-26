@@ -1,5 +1,22 @@
 # 安装与环境检查
 
+## 一键安装（Windows）
+
+在 PowerShell 执行：
+
+```powershell
+& ([scriptblock]::Create((Invoke-RestMethod 'https://raw.githubusercontent.com/k9438324-hash/jj-skill/main/install.ps1')))
+```
+
+此入口安装基础工具、jj、审稿依赖和独立 Python 环境，并运行环境检查。剪映需已安装并打开过一次。完成后重启 Codex。
+一键安装后的 Python 位于 `%LOCALAPPDATA%/jj-skill/venv/Scripts/python.exe`。后文所有 `py -3` 命令均应改用该解释器：
+
+```powershell
+& "$env:LOCALAPPDATA\jj-skill\venv\Scripts\python.exe" -X utf8 "$env:USERPROFILE\.agents\skills\jj\scripts\doctor.py"
+```
+
+以下为手动安装方法；使用一键入口后无需重复安装。
+
 支持 Windows + 剪映专业版。建议 Python 3.12；需要 Node.js LTS 和 Git 才能运行 npx 安装命令。
 
 ## 安装技能

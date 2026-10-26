@@ -2,7 +2,7 @@
 name: jj
 description: "/jj 以带时间码 SRT 或已确认切点为入口，低额度完成单条装修短视频的精确裁切、阶段锁定和独立剪映草稿。用户输入 /jj、要求按 SRT 剪视频、生成可编辑草稿或反馈剪辑额度消耗过快时使用；纯文案创作和工作台开发维护不使用。"
 metadata:
-  version: 0.7.5
+  version: 0.7.6
 ---
 
 # `/jj` 装修短视频低额度工作台
@@ -55,3 +55,5 @@ metadata:
 ## 首次安装
 
 首次运行、换电脑或依赖报错时先读 [安装与环境检查](references/install.md)，运行 doctor.py；技能安装成功不等于剪映运行环境可用。
+
+运行任何 Python 命令前，检查当前用户 `%LOCALAPPDATA%/jj-skill/venv/Scripts/python.exe` 是否存在。一键安装会把依赖装在这里；存在时用此解释器运行本技能所有脚本和子进程。不存在时使用已核验依赖的 Python，不混用解释器。PowerShell 示例：`& "$env:LOCALAPPDATA\jj-skill\venv\Scripts\python.exe" -X utf8 "技能目录\scripts\doctor.py"`。

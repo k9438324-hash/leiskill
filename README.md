@@ -4,6 +4,15 @@
 
 ## 下载与安装
 
+Windows 一键安装：在 PowerShell 粘贴下面整行。电脑需要安装并打开过剪映专业版，并已登录 Codex。
+
+```powershell
+& ([scriptblock]::Create((Invoke-RestMethod 'https://raw.githubusercontent.com/k9438324-hash/jj-skill/main/install.ps1')))
+```
+
+脚本缺少 Python 3.12、Git 或 Node.js 时通过 winget 安装，然后安装两个技能、独立 Python 环境、FFmpeg 和剪映草稿依赖，最后执行环境检查。系统安装可能弹出 Windows 权限窗口。没有 winget 时会给出补装提示。
+只有环境检查通过才显示成功。剪映本体、Codex 登录和剪映播放导出验收需另行完成。已有工具会复用，重复执行可续接失败步骤。
+
 [点击下载 ZIP](https://github.com/k9438324-hash/jj-skill/archive/refs/heads/main.zip)
 
 安装本技能（先安装 Node.js LTS 和 Git）：
@@ -36,4 +45,4 @@ npx -y skills add dontbesilent2025/dbskill --skill dbs-script-flow -g -y
 - [dbskill / dbs-script-flow](https://github.com/dontbesilent2025/dbskill)，单独安装，不在此重分发。
 - [aoguai/pyJianYingDraft](https://github.com/aoguai/pyJianYingDraft)，支持草稿加密读写的运行依赖，单独安装。
 
-本仓库提供 jj 技能文件下载；第三方依赖各自遵循其许可证。当前版本 0.7.5，首次公开打包。
+本仓库提供 jj 技能文件下载；第三方依赖各自遵循其许可证。当前版本 0.7.6，增加 Windows 一键安装入口。
