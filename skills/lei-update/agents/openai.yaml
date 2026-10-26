@@ -1,0 +1,4 @@
+interface:
+  display_name: "更新剪辑技能"
+  short_description: "明确请求时备份并更新官方剪辑技能与独立运行依赖，核对版本和环境"
+  default_prompt: "使用 $lei-update 处理当前视频剪辑任务，先依据已有材料和状态推进，保留确认与验证证据。"

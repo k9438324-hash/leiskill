@@ -5,14 +5,14 @@
 在 PowerShell 执行：
 
 ```powershell
-& ([scriptblock]::Create((Invoke-RestMethod 'https://raw.githubusercontent.com/k9438324-hash/jj-skill/main/install.ps1')))
+& ([scriptblock]::Create((Invoke-RestMethod 'https://raw.githubusercontent.com/k9438324-hash/leiskill/main/install.ps1')))
 ```
 
-此入口安装基础工具、jj、审稿依赖和独立 Python 环境，并运行环境检查。剪映需已安装并打开过一次。完成后重启 Codex。
-一键安装后的 Python 位于 `%LOCALAPPDATA%/jj-skill/venv/Scripts/python.exe`。后文所有 `py -3` 命令均应改用该解释器：
+此入口安装基础工具、leiskill 四个技能、缺失的审稿依赖和独立 Python 环境，并运行环境检查。剪映需已安装并打开过一次。完成后重启 Codex。
+一键安装后的实际 Python 记录在 LEISKILL_PYTHON 及 `%LOCALAPPDATA%/leiskill/runtime.json`。默认位于 `%LOCALAPPDATA%/leiskill/venv/Scripts/python.exe`；已有旧 jj-skill 环境时复用。后文所有 `py -3` 命令均应改用该解释器：
 
 ```powershell
-& "$env:LOCALAPPDATA\jj-skill\venv\Scripts\python.exe" -X utf8 "$env:USERPROFILE\.agents\skills\jj\scripts\doctor.py"
+& $env:LEISKILL_PYTHON -X utf8 "$env:USERPROFILE\.agents\skills\jj\scripts\doctor.py"
 ```
 
 以下为手动安装方法；使用一键入口后无需重复安装。
@@ -22,7 +22,7 @@
 ## 安装技能
 
 ```powershell
-npx -y skills add k9438324-hash/jj-skill --skill jj -g -y
+npx -y skills add k9438324-hash/leiskill --skill jj -g -y
 npx -y skills add dontbesilent2025/dbskill --skill dbs-script-flow -g -y
 ```
 

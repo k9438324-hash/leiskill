@@ -1,4 +1,4 @@
 interface:
-  display_name: "jj"
-  short_description: "一条视频一项目，用缓存和阶段锁定生成可编辑剪映草稿"
-  default_prompt: "使用 $jj 处理这条装修视频，先固定素材范围和验收条件，再复用缓存生成独立可编辑剪映草稿。"
+  display_name: "短视频剪辑"
+  short_description: "先审核原始时间码与确认切点，再生成独立可编辑的剪映草稿并检查结构"
+  default_prompt: "使用 $jj 处理当前视频剪辑任务，先依据已有材料和状态推进，保留确认与验证证据。"

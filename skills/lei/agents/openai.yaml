@@ -1,0 +1,4 @@
+interface:
+  display_name: "视频剪辑助手"
+  short_description: "依据已提供的材料与当前项目状态，选择下一步并交付可检查的剪辑结果"
+  default_prompt: "使用 $lei 处理当前视频剪辑任务，先依据已有材料和状态推进，保留确认与验证证据。"
