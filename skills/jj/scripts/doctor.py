@@ -39,8 +39,12 @@ def main() -> int:
         record('jianying_install', False, exc)
     record('jianying_user_data', wb.jianying_user_data().is_dir(), wb.jianying_user_data())
     record('subtitle_font', Path(wb.DEFAULT_SUBTITLE_FONT_PATH).is_file(), '字幕开启时需要；使用 JJ_FONT_PATH 或 manifest 指定字体', False)
-    flow = Path.home() / '.agents/skills/dbs-script-flow/SKILL.md'
-    record('dbs-script-flow', flow.is_file(), flow)
+    review = Path(__file__).with_name('review_srt.py')
+    try:
+        result = wb.subprocess.run([sys.executable, '-X', 'utf8', str(review), '--help'], capture_output=True, timeout=15)
+        record('builtin_srt_review', review.is_file() and result.returncode == 0, review)
+    except Exception as exc:
+        record('builtin_srt_review', False, exc)
     ok = all(row['ok'] for row in checks if row['required'])
     print(json.dumps(dict(ok=ok, checks=checks, scope='environment only; draft playback and export not verified'), ensure_ascii=False, indent=2))
     return 0 if ok else 1

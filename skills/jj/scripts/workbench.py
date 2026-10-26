@@ -108,10 +108,13 @@ def cmd_content_gate(a):
         }
         print(json.dumps({
             "ok": True,
-            "action": "run_dbs_script_flow",
+            "action": "review_srt",
+            "review_engine": "builtin",
+            "review_script": str(Path(__file__).with_name("review_srt.py")),
+            "review_reference": str(Path(__file__).resolve().parents[1] / "references" / "srt-review.md"),
             "srt": str(srt),
             "duration": duration,
-            "required_cut_fields": ["id", "source_start", "source_end", "text", "decision_reason", "flow_risk", "suggested_order"],
+            "required_cut_fields": ["id", "cue_ids", "decision", "reason", "risks", "order"],
             "await_human_confirmation": True,
             "media_processing_allowed": False,
             "blocked_commands": ["ingest", "transcribe", "prepare-visuals"],

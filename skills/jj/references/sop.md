@@ -33,7 +33,7 @@ py -3 scripts/workbench.py build-jianying --project "D:\剪辑工作台\项目�
 
 后续依次锁定 `audio`、`visual`、`overlay`。`status`只输出紧凑状态，不输出逐字稿内容。
 
-先过 `content-gate`。有 SRT 时完成 `/dbs-script-flow` 检查并等待用户确认；已有确认 manifest 时直接执行；两者都没有时停止。用户说“约2.5分钟”时使用150/135/165；用户给出其他区间时按原话设置。脚本manifest必须先写 `duration_budget.sections`；合格素材不足时报告缺口，不复制句子、重复镜头或拉长停顿补时长。
+先过 `content-gate`。有 SRT 时完成内置 SRT 审稿与本地提案检查并等待用户确认；已有确认 manifest 时直接执行；两者都没有时停止。用户说“约2.5分钟”时使用150/135/165；用户给出其他区间时按原话设置。脚本manifest必须先写 `duration_budget.sections`；合格素材不足时报告缺口，不复制句子、重复镜头或拉长停顿补时长。
 
 `ingest` 默认只建立完整素材索引。不要在文字阶段传 `--proxies --contact-sheets`；这两个旧参数仅保留兼容。文字确认并锁定 `audio` 后，先运行 `build-audio-preview` 生成 `qa/audio-preview.m4a` 供 QA 留档；本地时长、源区间和构建检查通过后，不等待用户试听，直接使用 `prepare-visuals --scope selected` 处理入选素材。只有自动检查失败、切点无法可靠映射或发现明确音频异常时才暂停。需要从同项目全部素材挑B-roll时，才使用 `--scope all`。音频、代理与联系表均先写入临时文件，成功后原子替换；中断时不得留下可被识别为正式缓存的残片。
 

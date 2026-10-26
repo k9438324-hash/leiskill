@@ -2,7 +2,7 @@
   "schema_version": 1,
   "name": "leiskill",
   "display_name": "lei 的视频剪辑 Skills",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "repository": "k9438324-hash/leiskill",
   "skills": [
     {
@@ -27,7 +27,7 @@
       "name": "lei-doctor",
       "display_name": "检查剪辑环境",
       "category": "maintenance",
-      "description": "检查 leiskill 的 Python、FFmpeg、审稿依赖和剪映草稿运行环境。用户首次安装、换电脑、依赖报错或要求检查能否运行时使用；只读诊断，不自动安装工具或修改剪映工程。",
+      "description": "检查 leiskill 的 Python、FFmpeg、内置审稿脚本和剪映草稿运行环境。用户首次安装、换电脑、依赖报错或要求检查能否运行时使用；只读诊断，不自动安装工具或修改剪映工程。",
       "accepts": "首次安装、换电脑、运行错误或明确的环境检查请求",
       "produces": "逐项检查结果、缺失依赖和可复现的下一步",
       "excludes": "未经请求自动安装、读视频正文、修改已有工程"
@@ -42,12 +42,14 @@
       "excludes": "自动更新其他技能、删除项目缓存或素材、把未执行命令说成更新成功"
     }
   ],
-  "dependencies": [
+  "dependencies": [],
+  "bundled_components": [
     {
-      "name": "dbs-script-flow",
-      "source": "dontbesilent2025/dbskill",
-      "kind": "external-skill",
-      "use": "对用户指定 SRT 进行逻辑与删留审阅；单独安装，不在本仓库重分发"
+      "name": "srt-review",
+      "path": "skills/jj/scripts/review_srt.py",
+      "protocol": "leiskill-srt-review-v1",
+      "purpose": "核对用户提供的 SRT 与审稿提案，不作编辑判断或用户审批",
+      "requirements": "Python standard library"
     }
   ]
 }

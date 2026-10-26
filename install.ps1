@@ -126,12 +126,8 @@ if (Test-Path -LiteralPath $backupRoot) { Write-Host ('Skill backup: ' + $backup
 $installArgs = @('-y','skills','add','k9438324-hash/leiskill','--skill','lei','jj','lei-doctor','lei-update','--agent') + @($leiTargets.CliAgents) + @('-g','-y')
 & npx.cmd @installArgs
 if ($LASTEXITCODE -ne 0) { throw ('leiskill installation failed. Existing backups: ' + $backupRoot) }
-if (-not (Test-Path -LiteralPath (Join-Path $skillsRoot 'dbs-script-flow\SKILL.md'))) {
-    & npx.cmd -y skills add dontbesilent2025/dbskill --skill dbs-script-flow --agent codex -g -y
-    if ($LASTEXITCODE -ne 0) { throw 'dbs-script-flow installation failed.' }
-}
 foreach ($hostEntry in $leiTargets.NativeHosts) {
-    foreach ($skillName in @('lei', 'jj', 'lei-doctor', 'lei-update', 'dbs-script-flow')) {
+    foreach ($skillName in @('lei', 'jj', 'lei-doctor', 'lei-update')) {
         $clientTarget = Join-Path $hostEntry.Root $skillName
         if ($hostEntry.Name -eq 'claude-code' -and (Test-Path -LiteralPath $clientTarget)) { continue }
         Connect-LeiSkill (Join-Path $skillsRoot $skillName) $clientTarget

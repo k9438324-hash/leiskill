@@ -2,7 +2,7 @@
 name: jj
 description: "/jj 以带时间码 SRT 或已确认切点为入口，低额度完成单条短视频的精确裁切、阶段锁定和独立剪映草稿。用户输入 /jj、要求按 SRT 剪视频、生成可编辑草稿或反馈剪辑额度消耗过快时使用；纯文案创作和工作台开发维护不使用。"
 metadata:
-  version: 0.8.1
+  version: 0.9.0
   lei-handoff: |
     - 接手：带时间码 SRT 或用户明确确认的切点，以及指定素材范围
     - 交出：原始时间码审阅表或独立 60fps 可编辑剪映草稿与结构检查
@@ -24,8 +24,8 @@ metadata:
 
 ## 工作方式
 
-1. 先运行 `scripts/workbench.py content-gate` 判断文字入口。已有用户确认的切点 manifest 时直接进入执行；有带时间码 SRT 时先调用 `/dbs-script-flow`；两者都没有时停止并只索取 SRT。闸门通过前不入库、不转写、不生成代理或联系表。
-2. `/dbs-script-flow` 只检查 SRT 的逻辑衔接、冗余、信息密度和流失点，并交付可追溯的候选切点；具体格式见 [SRT 删稿与切点交接](references/srt-script-flow.md)。先让用户确认，确认后才写入 `human_approved=true` 的切点 manifest。
+1. 先运行 `scripts/workbench.py content-gate` 判断文字入口。已有用户确认的切点 manifest 时直接进入执行；有带时间码 SRT 时执行 [内置 SRT 审稿流程](references/srt-review.md)；两者都没有时停止并只索取 SRT。闸门通过前不入库、不转写、不生成代理或联系表。
+2. 内置审稿阶段根据本条目标提出删留与重排方案；本地脚本校验原话、源时间码、字幕覆盖和总时长，再交付可追溯的候选切点；具体格式见 [SRT 删稿与切点交接](references/srt-review.md)。先让用户确认，确认后才写入 `human_approved=true` 的切点 manifest。
 3. 对已有项目运行 `scripts/workbench.py status`。已有缓存和锁定结果必须复用；确认切点后只按 manifest 定位素材和精确裁切，不重新删稿、改顺序或补选内容。
 4. 未建项目时按 [SOP](references/sop.md) 初始化。目标时长以用户明确要求为准；用户只说“约2.5分钟”时使用目标150秒、验收135—165秒。
 5. 模型只处理 `candidates.json`、阶段manifest摘要和受限联系表。
@@ -41,10 +41,10 @@ metadata:
 
 ## 决策边界
 
-- `/dbs-script-flow` 负责 SRT 主线、删留、衔接和流失风险；`/jj` 接收用户确认的切点后只做执行与验证。
+- 审稿在 `/jj` 内部完成；只根据已提供的 SRT 制定提案，接收用户明确确认后才执行与验证。
 - 快速模型只做候选粗分类、字幕分屏、已锁定标题和错误归类；最多两次。
 - 扫描、指纹、转写、关键词检索、代理、联系表、时间换算、草稿生成和QA均本地执行。
-- `/dbs-script-flow` 只读取用户指定的 SRT；切点确认后 `/jj` 不再读取完整逐字稿、完整素材目录或完整草稿JSON，失败时只读取错误附近的最小上下文。
+- 内置审稿流程只读取用户指定的 SRT；切点确认后 `/jj` 不再读取完整逐字稿、完整素材目录或完整草稿JSON，失败时只读取错误附近的最小上下文。
 - 同一素材以内容指纹缓存，文件名不是唯一身份。
 - 媒体代理和联系表写入临时文件，成功后才替换正式缓存；中断或失败必须终止本次子进程并清理残片。
 - `index-manifest-sources` 只合并manifest引用，不得删除已有同项目素材索引或B-roll候选。
@@ -53,7 +53,7 @@ metadata:
 - 普通口播字幕不加表达性标点，删除句首句尾无信息语气词；音频只有能无损独立切除时才删，不能破坏作者声音。
 - Overlay Studio只接收已锁定标题、章节字、关键词和CTA；`overlay-handoff`生成受限任务包。扩展不可用、资产缺失或格式不受支持时回退剪映原生文本。
 
-需要开始新任务或交接其他Agent时读取 [调用模板](references/invocation.md)。收到 SRT 或确认切点时读取 [SRT 删稿与切点交接](references/srt-script-flow.md)。需要命令、预算、锁定规则和停止条件时读取 [SOP](references/sop.md)。需要编写或校验manifest时读取 [数据契约](references/schemas.md)。
+需要开始新任务或交接其他Agent时读取 [调用模板](references/invocation.md)。收到 SRT 或确认切点时读取 [SRT 删稿与切点交接](references/srt-review.md)。需要命令、预算、锁定规则和停止条件时读取 [SOP](references/sop.md)。需要编写或校验manifest时读取 [数据契约](references/schemas.md)。
 
 
 ## 首次安装

@@ -2,7 +2,7 @@
 
 **lei 的视频剪辑 Skills**
 
-[![Version](https://img.shields.io/badge/version-0.8.1-2563EB)](VERSION)
+[![Version](https://img.shields.io/badge/version-0.9.0-2563EB)](VERSION)
 
 面向本地短视频素材的中文剪辑技能包。把带时间码的 SRT、素材目录和目标时长交给助手，先检查原话与删留切点，确认后生成独立、可编辑的剪映草稿。默认 60 fps、无字幕；保留原工程，复用项目缓存。
 
@@ -18,7 +18,7 @@ https://github.com/k9438324-hash/leiskill
 
 先读取仓库 README 和安装说明，检查你当前是否具备联网、执行本机命令和安装 Skills 的能力。
 具备能力时，请按当前操作系统和你所在的 AI 客户端实际执行安装，不要只复述步骤。
-Windows 使用仓库官方 install.ps1，安装四个技能、审稿依赖和剪辑运行环境；检查并配置当前客户端的技能入口。
+Windows 使用仓库官方 install.ps1，安装四个技能、内置审稿脚本和剪辑运行环境；检查并配置当前客户端的技能入口。
 保留已有素材、剪映工程、项目状态和其他技能；更新同名技能前先备份。
 安装后核对技能文件，执行环境检查，并说明怎样在当前客户端调用“视频剪辑助手”或“短视频剪辑”。
 只有检查通过才能说安装成功；缺少剪映、权限、网络或工具时，明确报告卡在哪一步。
@@ -28,7 +28,7 @@ Windows 使用仓库官方 install.ps1，安装四个技能、审稿依赖和剪
 
 支持本机工具和 Skills 的客户端可以执行安装；仅聊天的网页或手机版需要按 AI 给出的步骤操作。Claude 的本机执行版为 Claude Code；豆包等客户端是否能直接安装，以当前版本的工具与导入能力为准。
 
-Windows 官方安装器会准备四个技能、缺失的审稿依赖及独立 Python 环境，检查 FFmpeg 和剪映。它使用公共技能目录，并为已安装的 Claude Code、WorkBuddy 配置对应入口。剪映专业版需提前安装并打开一次，AI 客户端需自行登录。[手动安装与故障排查](docs/安装与排障.md)
+Windows 官方安装器会准备四个技能、内置审稿脚本及独立 Python 环境，检查 FFmpeg 和剪映。它使用公共技能目录，并为已安装的 Claude Code、WorkBuddy 配置对应入口。剪映专业版需提前安装并打开一次，AI 客户端需自行登录。[手动安装与故障排查](docs/安装与排障.md)
 
 已有环境、只要技能文件时：
 
@@ -64,7 +64,7 @@ npx -y skills add k9438324-hash/leiskill -g --all
 | [/lei-doctor](skills/lei-doctor/SKILL.md) | 首次安装、换电脑、依赖报错 | 只读环境检查与缺失项 |
 | [/lei-update](skills/lei-update/SKILL.md) | 明确要求更新或重装 | 备份、更新结果与环境核对 |
 
-`dbs-script-flow` 是外部审稿依赖，从官方仓库单独安装，不计入本仓库四个技能。框架参考 dbskill，技能正文与脚本由本项目维护。[框架对照](docs/框架对照.md)
+审稿是 `/jj` 的内置阶段，使用独立编写的 [SRT 审稿流程](skills/jj/references/srt-review.md) 和原话、时间码校验脚本；不再安装或调用外部审稿 Skill。[审稿来源与验证边界](docs/审稿来源.md) · [框架对照](docs/框架对照.md)
 
 ## 能力与验收
 
